@@ -1,3 +1,42 @@
+const paletteContainer = document.getElementById("palette");
+const button = document.getElementById("generate-btn");
+const selectCantidad = document.getElementById("cantidad");
+const hslBtn = document.getElementById("hsl-btn");
+const hexBtn = document.getElementById("hex-btn");
+let formatoActual = "";
+
+
+
+//Activacion botones
+hslBtn.addEventListener("click", function () {
+  formatoActual = "hsl";
+
+  hslBtn.classList.add("activo");
+  hexBtn.classList.remove("activo");
+
+  renderizarPaleta();
+});
+
+hexBtn.addEventListener("click", function () {
+  formatoActual = "hex";
+
+  hexBtn.classList.add("activo");
+  hslBtn.classList.remove("activo");
+
+  renderizarPaleta();
+});
+
+
+// Colores en hsl
+function generarColorHSL() {
+  let h = Math.floor(Math.random() * 360);
+  let s = Math.floor(Math.random() * 41) + 60; // 60 a 100
+  let l = Math.floor(Math.random() * 31) + 35; // 35 a 65
+
+  return `hsl(${h}, ${s}%, ${l}%)`;
+}
+
+// Colores en hex
 function generarColorHex() {
   const letras = "0123456789ABCDEF";
   let color = "#";
@@ -9,25 +48,24 @@ function generarColorHex() {
   return color;
 }
 
-function generarPaleta(cantidad = 5) {
+// Paleta segun cantidad
+function generarPaleta(cantidad) {
   const colores = [];
 
   for (let i = 0; i < cantidad; i++) {
-    colores.push(generarColorHex());
+    colores.push(generarColorHSL());
   }
-
   return colores;
 }
 
-const paletteContainer = document.getElementById("palette");
-const button = document.getElementById("generate-btn");
-
+// Paleta en pantalla
 function renderizarPaleta() {
-  const colores = generarPaleta();
+  const cantidad = Number(selectCantidad.value);
+  const colores = generarPaleta(cantidad);
 
   paletteContainer.innerHTML = "";
 
-  colores.forEach(color => {
+  colores.forEach(function(color) {
     const div = document.createElement("div");
     div.classList.add("color-box");
     div.style.backgroundColor = color;
@@ -37,7 +75,9 @@ function renderizarPaleta() {
   });
 }
 
+// Boton y lista
 button.addEventListener("click", renderizarPaleta);
+selectCantidad.addEventListener("change", renderizarPaleta);
 
 // Primera carga
 renderizarPaleta();
