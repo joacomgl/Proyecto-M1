@@ -33,7 +33,7 @@ header h1 {
   overflow: hidden;
 }
 
-/* Botones HSL/HEX unidos */
+/* Botones HSL / HEX */
 .formato-btns {
   display: flex;
   border: 1px solid #ccc;
@@ -69,30 +69,29 @@ label {
   font-size: 0.95rem;
 }
 
-/* Botón generar */
-#generate-btn {
+/* Botones */
+#generate-btn,
+#guardar-btn {
   padding: 8px 20px;
-  background-color: #1a1a2e;
-  color: white;
-  border: none;
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
+}
+
+#generate-btn {
+  background-color: #1a1a2e;
+  color: white;
+  border: none;
 }
 
 #generate-btn:hover {
   background-color: #2d2d5e;
 }
 
-/* Botón guardar */
 #guardar-btn {
-  padding: 8px 20px;
   background-color: white;
   color: #1a1a2e;
   border: 2px solid #1a1a2e;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
 }
 
 #guardar-btn:hover {
@@ -103,10 +102,9 @@ label {
 #palette {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 12px;
   padding: 16px;
-  justify-content: center;
-  min-height: 0;
   background-color: #f9f9f9;
 }
 
@@ -115,23 +113,24 @@ label {
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  width: 100px;
+  width: 200px;
 }
 
 .color-box {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   border-radius: 16px;
   position: relative;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 .color-label {
-  margin-top: 6px;
-  font-size: 0.75rem;
+  margin-top: 8px;
+  font-size: 1rem;
   font-weight: bold;
   color: #333;
   text-align: center;
+  line-height: 1.2;
 }
 
 .candado-btn {
@@ -169,7 +168,6 @@ label {
 /* Aside */
 aside {
   padding: 16px;
-  margin-top: 0px;
 }
 
 .paleta-guardada {
@@ -213,6 +211,7 @@ aside {
   opacity: 1;
 }
 
+/* Borrar */
 .borrar-btn {
   padding: 6px 14px;
   background-color: white;
@@ -228,71 +227,66 @@ aside {
   color: white;
 }
 
-/* Tablet (hasta 768px) */
+/* Tablet */
 @media (max-width: 768px) {
   .controles {
     gap: 8px;
   }
 
-  #generate-btn, #guardar-btn {
+  #generate-btn,
+  #guardar-btn {
     padding: 8px 12px;
     font-size: 0.85rem;
   }
 }
 
-/* Móvil (hasta 480px) */
+/* Móvil */
 @media (max-width: 600px) {
-  .color-label {
-    font-size: 0.6rem;
-  }
-
-  .color-card {
-    width: 80px;
-  }
 
   header h1 {
-    font-size: 1.3rem;
-    padding: 12px;
+    font-size: 1.5rem;
+    padding: 10px;
   }
 
   .controles {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-    padding: 12px;
+    gap: 6px;
+    padding: 10px;
   }
 
   .formato-btns button {
-    width: 50px;
+    width: 60px;
+    padding: 10px 0;
   }
 
-  #generate-btn, #guardar-btn {
-    padding: 8px 14px;
-    font-size: 0.85rem;
+  .color-card {
+    width: 95px;
   }
 
   .color-box {
-    width: 80px;
-    height: 80px;
+    width: 95px;
+    height: 95px;
   }
 
-  #instructivo {
-    margin: 20px 12px;
-    padding: 12px 16px;
-  }
-
-  aside {
-    margin: 20px 12px;
-    padding: 12px 16px;
+  .color-label {
+    font-size: 0.85rem;
   }
 
   #palette {
-    flex-wrap: wrap;
-    min-height: 0;
+    padding: 12px;
+    gap: 10px;
+    align-content: flex-start;
+    min-height: calc(100vh - 140px);
   }
 
-  #palette .color-box {
-    height: 120px;
-    font-size: 0.55rem;
+  #generate-btn,
+  #guardar-btn {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+
+  #instructivo,
+  aside {
+    margin: 16px 10px;
+    padding: 12px;
   }
 }
