@@ -49,49 +49,53 @@ function generarPaleta(cantidad) {
   }
 }
 
+// Muestra la paleta en pantalla
 function mostrarPaleta() {
   paletteContainer.innerHTML = "";
 
   paletaActual.forEach(function(item) {
-    const div = document.createElement("div");
-    div.classList.add("color-box");
-    div.style.backgroundColor = item.color; // funciona con HSL y HEX
-    div.title = "Copiar al portapapeles";
+  const card = document.createElement("div");
+  card.classList.add("color-card");
 
-    // Texto del color
-    const span = document.createElement("span"); // primero se crea
-    span.textContent = item.color;               // después se usa
-    div.dataset.color = item.color;
+  // Bloque de color
+  const colorDiv = document.createElement("div");
+  colorDiv.classList.add("color-box");
+  colorDiv.style.backgroundColor = item.color;
 
-    // Botón candado
-    const candado = document.createElement("button");
-    candado.classList.add("candado-btn");
+  // Candado
+  const candado = document.createElement("button");
+  candado.classList.add("candado-btn");
+  candado.textContent = item.bloqueado ? "🔒" : "🔓";
+  candado.addEventListener("click", function(e) {
+    e.stopPropagation();
+    item.bloqueado = !item.bloqueado;
     candado.textContent = item.bloqueado ? "🔒" : "🔓";
-    candado.title = "Bloquear/desbloquear color";
-    
-    // Clic en candado — bloquea/desbloquea
-    candado.addEventListener("click", function(e) {
-      e.stopPropagation();
-      item.bloqueado = !item.bloqueado;
-      candado.textContent = item.bloqueado ? "🔒" : "🔓";
-    });
-
-    // Clic en div — copia al portapapeles
-    div.addEventListener("click", function() {
-      navigator.clipboard.writeText(div.dataset.color);
-      span.textContent = "¡Copiado!";
-      setTimeout(function() {
-        span.textContent = div.dataset.color;
-      }, 1000);
-    });
-
-    div.appendChild(span);
-    div.appendChild(candado);
-    paletteContainer.appendChild(div);
   });
+
+  colorDiv.appendChild(candado);
+
+  // Texto debajo
+  const span = document.createElement("span");
+  span.classList.add("color-label");
+  span.textContent = item.color;
+  card.dataset.color = item.color;
+
+  // Clic copia
+  card.addEventListener("click", function() {
+    navigator.clipboard.writeText(item.color);
+    span.textContent = "¡Copiado!";
+    setTimeout(function() {
+      span.textContent = item.color; // vuelve al color después de 1 segundo
+    }, 1000);
+  });
+
+  card.appendChild(colorDiv);
+  card.appendChild(span);
+  paletteContainer.appendChild(card);
+});
 }
 
-//Paleta en pantalla
+// Genera y muestra la paleta al hacer clic en el botón
 function renderizarPaleta() {
   if (formatoActual === "") return;
 
@@ -106,21 +110,21 @@ function renderizarPaleta() {
   mostrarPaleta();
 }
 
-//Lista cantidad en paleta
-selectCantidad.addEventListener("change", function() {
+// Lista cantidad en paleta
+selectCantidad.addEventListener("change", function () {
   if (paletaActual.length === 0) return; // si no hay paleta, no hace nada
 
   const cantidadNueva = Number(selectCantidad.value);
 
-  // agrega colores al final
- while (paletaActual.length < cantidadNueva) {
-  paletaActual.push({ 
-    color: generarColorHSL(), 
-    hex: generarColorHex(),
-    bloqueado: false 
-  }); //objeto. mantiene los colores fijos
-}
-  // quita colores del final
+  // Agrega colores al final
+  while (paletaActual.length < cantidadNueva) {
+    paletaActual.push({
+      color: formatoActual === "hex" ? generarColorHex() : generarColorHSL(),
+      bloqueado: false
+    });
+  }
+
+  // Quita colores del final
   while (paletaActual.length > cantidadNueva) {
     paletaActual.pop();
   }
@@ -173,6 +177,10 @@ function guardarPaleta() {
 // Muestra las paletas guardadas en pantalla
 function mostrarPaletasGuardadas() {
   const guardadas = JSON.parse(localStorage.getItem("paletas")) || [];
+
+  const titulo = document.getElementById("titulo-guardadas");
+  titulo.textContent = guardadas.length > 0 ? "Paletas guardadas" : "";
+
   paletasGuardadas.innerHTML = "";
 
   guardadas.forEach(function(paleta, index) {
@@ -198,6 +206,7 @@ function mostrarPaletasGuardadas() {
       mostrarPaletasGuardadas();
     });
 
+    borrarBtn.classList.add("borrar-btn");
     contenedor.appendChild(borrarBtn);
     paletasGuardadas.appendChild(contenedor);
   });

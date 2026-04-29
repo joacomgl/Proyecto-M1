@@ -3,48 +3,21 @@ body {
   text-align: center;
   margin: 0;
   padding: 0;
+  background-color: #f9f9f9;
+  overflow-x: hidden;
 }
 
+/* Header */
 header {
-  padding: 16px;
-}
-
-/* Instructivo */
-#instructivo {
-  max-width: 400px;
-  margin: 20px auto;
-  padding: 16px 24px;
-  background-color: #f5f5f5;
-  border-radius: 10px;
-  text-align: left;
-}
-
-#instructivo h2 {
-  text-align: center;
-  margin-top: 0;
-}
-
-#instructivo ol {
-  padding-left: 20px;
-  line-height: 2;
-}
-
-/* Paleta */
-#palette {
-  display: flex;
-  min-height: 300px;
-}
-
-.color-box {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  background-color: #1a1a2e;
   color: white;
-  font-weight: bold;
-  cursor: pointer;
-  position: relative;
+  padding: 24px 16px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+  letter-spacing: 1px;
 }
 
 /* Controles */
@@ -53,43 +26,150 @@ header {
   align-items: center;
   justify-content: center;
   gap: 12px;
-  padding: 16px;
+  padding: 20px 16px;
   flex-wrap: wrap;
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  overflow: hidden;
 }
 
+/* Botones HSL/HEX unidos */
 .formato-btns {
   display: flex;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .formato-btns button {
-  width: 80px;
-}
-
-button {
+  width: 60px;
+  border: none;
+  padding: 8px 0;
+  background-color: white;
   cursor: pointer;
-  padding: 6px 12px;
+  font-weight: bold;
 }
 
-.activo {
-  background-color: black;
+.formato-btns button.activo {
+  background-color: #1a1a2e;
   color: white;
 }
 
-/* Candado */
-.candado-btn {
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
-  background: none;
-  border: none;
-  font-size: 1.2rem;
+/* Select */
+select {
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
   cursor: pointer;
 }
 
-/* Aside - paletas guardadas */
+label {
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+/* Botón generar */
+#generate-btn {
+  padding: 8px 20px;
+  background-color: #1a1a2e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#generate-btn:hover {
+  background-color: #2d2d5e;
+}
+
+/* Botón guardar */
+#guardar-btn {
+  padding: 8px 20px;
+  background-color: white;
+  color: #1a1a2e;
+  border: 2px solid #1a1a2e;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#guardar-btn:hover {
+  background-color: #f0f0f0;
+}
+
+/* Paleta */
+#palette {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px;
+  justify-content: center;
+  min-height: 0;
+  background-color: #f9f9f9;
+}
+
+.color-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  width: 100px;
+}
+
+.color-box {
+  width: 100px;
+  height: 100px;
+  border-radius: 16px;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.color-label {
+  margin-top: 6px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+.candado-btn {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Instructivo */
+#instructivo {
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 16px 24px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  text-align: left;
+}
+
+#instructivo h2 {
+  text-align: center;
+  margin-top: 0;
+  color: #1a1a2e;
+}
+
+#instructivo ol {
+  padding-left: 20px;
+  line-height: 2.2;
+}
+
+/* Aside */
 aside {
   padding: 16px;
-  margin-top: 16px;
+  margin-top: 0px;
 }
 
 .paleta-guardada {
@@ -119,7 +199,7 @@ aside {
   bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #333;
+  background-color: #1a1a2e;
   color: white;
   padding: 10px 20px;
   border-radius: 8px;
@@ -131,4 +211,88 @@ aside {
 
 #toast.visible {
   opacity: 1;
+}
+
+.borrar-btn {
+  padding: 6px 14px;
+  background-color: white;
+  color: #c0392b;
+  border: 2px solid #c0392b;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.borrar-btn:hover {
+  background-color: #c0392b;
+  color: white;
+}
+
+/* Tablet (hasta 768px) */
+@media (max-width: 768px) {
+  .controles {
+    gap: 8px;
+  }
+
+  #generate-btn, #guardar-btn {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Móvil (hasta 480px) */
+@media (max-width: 600px) {
+  .color-label {
+    font-size: 0.6rem;
+  }
+
+  .color-card {
+    width: 80px;
+  }
+
+  header h1 {
+    font-size: 1.3rem;
+    padding: 12px;
+  }
+
+  .controles {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .formato-btns button {
+    width: 50px;
+  }
+
+  #generate-btn, #guardar-btn {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+
+  .color-box {
+    width: 80px;
+    height: 80px;
+  }
+
+  #instructivo {
+    margin: 20px 12px;
+    padding: 12px 16px;
+  }
+
+  aside {
+    margin: 20px 12px;
+    padding: 12px 16px;
+  }
+
+  #palette {
+    flex-wrap: wrap;
+    min-height: 0;
+  }
+
+  #palette .color-box {
+    height: 120px;
+    font-size: 0.55rem;
+  }
 }

@@ -11,22 +11,22 @@
   </header>
 
 <main>
-  <!-- Controles primero -->
+  <!-- Controles en una sola fila -->
   <div class="controles">
-    <button id="generate-btn">Generar Paleta</button>
-     <button id="guardar-btn">Guardar Paleta</button>
+    <div class="formato-btns">
+      <button id="hsl-btn">HSL</button>
+      <button id="hex-btn">HEX</button>
+    </div>
 
-    <label for="cantidad">Cantidad de colores:</label>
+    <label for="cantidad">Cantidad:</label>
     <select id="cantidad">
       <option value="6" selected>6</option>
       <option value="8">8</option>
       <option value="9">9</option>
     </select>
 
-    <div class="formato-btns">
-      <button id="hsl-btn">hsl</button>
-      <button id="hex-btn">hex</button>
-    </div>
+    <button id="generate-btn">Generar Paleta</button>
+    <button id="guardar-btn">Guardar Paleta</button>
   </div>
 
   <!-- Paleta -->
@@ -42,13 +42,14 @@
         <li>Guardá hasta 2 paletas favoritas</li>
       </ol>
     </div>
-</section>
+  </section>
 </main>
-  <!-- Paletas guardadas -->
-  <aside id="paletas-guardadas"></aside>
 
-  <!-- Toast -->
-  <div id="toast"></div>
+<aside>
+  <h2 id="titulo-guardadas"></h2>
+  <div id="paletas-guardadas"></div>
+</aside>
+<div id="toast"></div>
 
   <script src="js/index.js"></script>
 </body>
